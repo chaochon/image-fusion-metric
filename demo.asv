@@ -1,0 +1,33 @@
+function [] = main()
+  rootDir = 'Images';
+  
+  reference_img = '2.jpg';
+  fused_img = 'our.jpg';
+ 
+  fileFolders = dir(fullfile(rootDir, '*'));
+  fileNames = {fileFolders.name};
+  fileNum = len(fileNames);
+  for n = 3:1:fileNum
+      % the image file path
+      hdrImage_path = fullfile(rootDir, fileNames(n), reference_img);
+      ldrImage_path = fullfile(rootDir, fileNames(n), fused_img);
+      % reference image
+      hdrImage = imread(hdrImage_path);
+      % the image of being computed
+      ldrImage = imread(ldrImage_path);
+      
+      if isempty(hdrImage) || isempty(ldrImage)
+          disp('load image is error');
+      end
+      [Q, S, N, s_maps, s_local] = TMQI(hdrImage, ldrImage);
+      
+      % print metric
+      
+      
+      
+
+  end
+
+
+
+end
